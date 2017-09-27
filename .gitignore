@@ -203,6 +203,7 @@ TSWLatexianTemp*
 # WinEdt
 *.bak
 *.sav
+*.$$$
 
 # Texpad
 .texpadtmp
@@ -218,3 +219,6 @@ TSWLatexianTemp*
 
 # expex forward references with \gathertags
 *-tags.tex
+
+##Python
+*.pyc
