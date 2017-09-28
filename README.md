@@ -10,4 +10,4 @@ Latex files can be constructed using pdflatex.
 
     jupyter notebook
 
-Note that we all stand on the shoulders of giants, and I owe a debt of gratitude to the giants from which these course material were derived from Professors Rachel Slaybaugh, James Fee, Tony Kelly, Jasmina Vujic, Yousry Azmy, James Rossmanith, and Amos Ron.  
+Note that we all stand on the shoulders of giants, and I owe a debt of gratitude to the giants from which this course material was derived from: Professors Rachel Slaybaugh, James Fee, Tony Kelly, Jasmina Vujic, Yousry Azmy, James Rossmanith, and Amos Ron.  
