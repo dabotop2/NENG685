@@ -222,3 +222,7 @@ TSWLatexianTemp*
 
 ##Python
 *.pyc
+*-checkpoint.ipynb
+
+##Microsoft
+~$*
