@@ -54,6 +54,8 @@
 \makeatother
 
 \usepackage{babel}
+\usepackage{csquotes}
+
 \begin{document}
 \begin{center}
 {\huge{}NENG 685 - Fall 2017}
@@ -84,7 +86,7 @@ Office hours: T/Th, 0900-1000 \& by appt
 
 \section*{Course Description}
 
-This course covers the principal methods used for deterministically solving the Boltzmann transport equation for neutral particles (neutrons and photons). This course presents the fundamental mathematical and computational methods using discretezations in space, energy, and angle.  Iterative methods for efficient solution of the transport problems are explored and analyzed.  Monte Carlo and Discrete Ordinates methods are explicitly developed and applied to shielding and criticality problems of interest.  The course will include both code development and use of existing codes for solving criticality and shielding problems of interest in nuclear engineering.
+This course covers the principal methods used for deterministically solving the Boltzmann transport equation for neutral particles (neutrons and photons). This course presents the fundamental mathematical and computational methods using discretizations in space, energy, and angle.  Iterative methods for efficient solution of the transport problems are explored and analyzed.  Monte Carlo and Discrete Ordinates methods are explicitly developed and applied to shielding and criticality problems of interest.  The course will include both code development and use of existing codes for solving criticality and shielding problems of interest in nuclear engineering.
 
 \section*{Requisites}
 
@@ -107,6 +109,11 @@ Springer,  2012.
   \item Free programming lessons: \url{https://software-carpentry.org/lessons/}
   \item Reproducible Research: \url{https://www.practicereproducibleresearch.org/}
   \item Helpful guides: \url{https://github.com/jamesbevins/SurvivingAFIT}
+  \item Jupyter (the awesome thing formerly known as iPython): \href{http://jupyter.org/}{http://jupyter.org/}
+  \item KAERI: \href{http://atom.kaeri.re.kr/}{http://atom.kaeri.re.kr/}
+  \item U.S.\ Nuclear Data \href{http://www.nndc.bnl.gov/}{http://www.nndc.bnl.gov/}
+  \item E.\ E.\ Lewis and W.\ E.\ Miller Jr., ``Computational Methods of Neutron Transport," J.\ Wiley \& Sons, New York (1993).
+  \item J.\ J.\ Duderstadt and L.\ J.\ Hamilton, ``Nuclear Reactor Analysis," Wiley (1976)
 \end{itemize}
 
 \section*{Course Objectives}
@@ -117,8 +124,8 @@ At the end of the course, students should:
 \item Develop code to solve problems of interest in nuclear engineering
 \item Be able to numerically solve ODEs, PDEs, and systems of equations
 \item Be able to perform numerical integration and differentiation
-\item Understand the different methods of neutron transport and associated benefits and drawbacks
-\item Understand Boltzmann Transport Equation, Diffusion Equation, and the methods used to solve
+\item Understand the different methods of neutron transport and their associated benefits and drawbacks
+\item Understand Boltzmann Transport Equation, Diffusion Equation, and the methods used to solve them
 \item Understand Monte Carlo transport techniques and associated concepts
 \item Be familiar with deterministic transport (PENTRAN) and stochastic transport (MCNP) codes
 \item Be comfortable operating in the remote high performance computing environments available at AFIT
@@ -136,7 +143,7 @@ The pre-flight quizzes are meant to enhance learning by instilling key foundatio
   \item Final Project (code, paper, presentation): 30\% 
 \end{itemize}
 
-It is not anticipated that there will be a curve applied.  It is my belief that the grades will sort themselves out if the course assessment material is properly done.  I have no set distribution of grades and have no reservation about everyone earning "As" or any other grade on the spectrum.  Rarely are there enough statistics (i.e. students) in this class to try to impose a normal distribution on the grades and in the AF (and grad school) 90\% of the people are above average. \newline
+It is not anticipated that there will be a curve applied.  It is my belief that the grades will sort themselves out if the course assessment material is properly done.  I have no set distribution of grades and have no reservation about everyone earning \enquote{As} or any other grade on the spectrum.  Rarely are there enough statistics (i.e. students) in this class to try to impose a normal distribution on the grades and in the AF (and grad school) 90\% of the people are above average. \newline
 
 Extra points - specified in each assignment - may be available for following "best practices" that are above and beyond what is required to complete the assignment.
 
@@ -144,7 +151,7 @@ Extra points - specified in each assignment - may be available for following "be
 
 My philosophy is that it is best to know one language really well because different organizations, communities, projects, etc. will require different languages, and it is impossible and often counterproductive to learn them all.  If you know one language well, you can pick up other languages when the need arises. \newline
 
-Consistent with this philosophy, this course will primarily be taught using Python. The goal is to get you proficient in \textit{a language} by the end of the course. However, you are free to use whatever language you feel comfortable with and works for your workflow.  The languages I will be able to help with in terms of decreasing knowledge and/or increasing time since last use: Python, Matlab, FORTRAN, C++, and Java.  There are other resources in the department, online, and in my library for the various languages.
+Consistent with this philosophy, this course will primarily be taught using Python. The goal is to get you proficient in \textit{a language} by the end of the course. However, you are free to use whatever language you feel comfortable with and works for your workflow.  The languages I will be able to help with in order of decreasing knowledge and/or increasing time since last use: Python, Matlab, FORTRAN, C++, and Java.  There are other resources in the department, online, and in my library for the various languages as well that you are free to use.
 
 \section*{Academic Integrity}
 
@@ -167,7 +174,7 @@ My policy is that you may work together on homework, but you must \textbf{specif
 
 \section*{Attendance}
 
-Course credit presumes the student has attended all class sessions in addition to completing all tasks.  Thus, attendance is mandatory in all sessions to graduate.  If students have an extraordinary reason to be absent (example: a sickness, car breakdown, etc.), the student must contact the instructor (in advance if possible) to evaluate if the absence will be excusable prior to continuing the student in the course.
+Course credit presumes the student has attended all class sessions in addition to completing all tasks.  Thus, attendance is mandatory in all sessions to graduate.  If students have an extraordinary reason to be absent (example: a sickness, car breakdown, etc.), the student must contact the instructor (in advance if possible) to evaluate if the absence will be excusable.
 
 \section*{Course Schedule}
 
