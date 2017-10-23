@@ -1,0 +1,368 @@
+%--------------------------------------------------------------------
+% NENG 685 (Introduction to Neutral Particle Transport)
+% Final Project
+% Fall 2017
+
+% Exam Template from UMTYMP and Math Department courses
+%
+% Using Philip Hirschhorn's exam.cls: http://www-math.mit.edu/~psh/#ExamCls
+%
+% run pdflatex on a finished exam at least three times to do the grading table on front page.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% These lines can probably stay unchanged, although you can remove the last
+% two packages if you're not making pictures with tikz.
+\documentclass[12pt, answers]{exam}
+%\documentclass[12pt]{exam}
+\RequirePackage{amssymb, amsfonts, amsmath, latexsym, verbatim, xspace, setspace}
+\RequirePackage{tikz, pgflibraryplotmarks}
+\usepackage{hyperref}
+
+% By default LaTeX uses large margins.  This doesn't work well on exams; problems
+% end up in the "middle" of the page, reducing the amount of space for students
+% to work on them.
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate, paralist}
+
+% writing elements
+\usepackage[version=4]{mhchem}
+
+% Here's where you edit the Class, Exam, Date, etc.
+\newcommand{\class}{NENG 685}
+\newcommand{\term}{Fall 2017}
+\newcommand{\assignment}{Final Project}
+\newcommand{\duedate}{Dec.\ 12, 2017}
+%\newcommand{\timelimit}{50 Minutes}
+
+\newcommand{\nth}{n\ensuremath{^{\text{th}}} }
+\newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Macro}{\ensuremath{\Sigma}}
+\newcommand{\vOmega}{\ensuremath{\hat{\Omega}}}
+
+% For an exam, single spacing is most appropriate
+\singlespacing
+% \onehalfspacing
+% \doublespacing
+
+% For an exam, we generally want to turn off paragraph indentation
+\parindent 0ex
+
+\begin{document} 
+
+% These commands set up the running header on the top of the exam pages
+\pagestyle{head}
+\firstpageheader{}{}{}
+\runningheader{\class}{\assignment\ - Page \thepage\ of \numpages}{Due \duedate}
+\runningheadrule
+
+
+\begin{flushright}
+\begin{tabular}{p{5in} r l}
+\class & \term \\
+\assignment & Due \duedate\\
+\vspace*{1 em}
+Name:
+\end{tabular}
+\end{flushright}
+\rule[1ex]{\textwidth}{.1pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% See http://www-math.mit.edu/~psh/#ExamCls for full documentation, but the questions
+% below give an idea of how to write questions [with parts] and have the points
+% tracked automatically on the cover page.
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{minipage}[t]{3.7in}
+\vspace{0pt}
+
+Final projects are intended to be applications of one or more of the primary topics of this course.  
+They are intended to be a bit open-ended to allow you to develop solution methods within the tool-box.
+Note: this doesn't mean they don't have a right answer - there may just be many paths to that answer.
+
+These project descriptions are subject to change as the student and instructor refine the project description.
+The overall goals and concepts are valid, but nuance and clarifications may be added if they benefit the student.
+
+The final project will consist of:
+
+\begin{itemize}
+  \item A 15 Min Presentation (Due Dec 6th in class)
+  \item A write-up of the problem and solution method following the IEEE format
+  \item All code used to solve the problem
+\end{itemize}
+
+On the Final Project:
+\begin{itemize}
+\item If you work with anyone else, document what you worked on together.
+\item Show your work.
+\item Always clearly label plots (axis labels, a title, and a legend if applicable).
+\end{itemize}
+
+\href{https://github.com/jamesbevins/NENG685/Projects/Project_Rubric.pdf}{Project Rubric}.
+\end{minipage}
+\newpage % End of cover page
+
+
+% ---------------------------------------------
+\begin{questions}
+\question \textbf{Germanium Detector Model (Project 1 of 2):}
+
+We have shielded germanium (Ge) detectors in bldg 470 that are used for gamma spectroscopy.  
+In gamma spectroscopy, often we have to correct for the geometry, attenuation, detector efficiency, coincident summing, and other factors.  
+Sometimes these can be determined experimentally.  
+However, this is not always possible, so having a computational model of the detector can be very beneficial when counting non-standard geometries and sources.
+
+LTC O'Day took a series of measurements using the multi-nuclide source.  
+The associated files are located in the repo in the \href{https://github.com/jamesbevins/NENG685/Projects/Project1_GeDetModel}{Project1\textunderscore GeDetModel} folder. 
+In that folder, we also have the manufacturer specs for the Ge detector.
+Unfortunately, the detector is rarely exactly as described, and model adjustments have to be made by tweaking basic model parameters such as radius, length, and density (see project 2 for a better way to do this).
+
+This project's goal is to build a MCNP or PENTRAN model of the Ge detector that represents the experimental data as closely as possible.  
+The correlation between the experimental data and the model should be quantified.  
+Analysis of the model results and experimental data should be as automated as possible (i.e. don't use excel). 
+The adjoint flux calculation using ADVANTAG (MCNP) or PENTRAN should then be performed on the final model to show the efficiency over all space inside the shielded volume.
+
+If MCNP is used, I can provide a couple of tools and scripts that might be useful.  
+
+\textbf{Usefulness:} 
+This project's model could be useful in a broad range of experimental work for many students looking at activation measurement.  
+There is a possibility of a conference paper and/or paper if interested; Dr. Sjoden and LTC O'Day originated the effort to do so.
+
+\textbf{Challenges:}
+It is unclear if the current data is actually sufficient to fully specify the model; if not this could be a 650 project to gather more data.  
+Without someone doing project \#2, the sampling of the possible model parameters is tedious.  
+This can be overcome somewhat with knowledge of gamma interaction dynamics, but that is not required. 
+
+\textbf{Computational requirements:}
+This can be run on a personal computer or any local resource with MCNP.
+
+\textbf{POC:} Capt Bevins, LTC O'Day
+  
+\newpage
+ 
+
+\question \textbf{Germanium Detector Model (Project 2 of 2):}
+
+We have shielded germanium (Ge) detectors in bldg 470 that are used for gamma spectroscopy.  
+In gamma spectroscopy, often we have to correct for the geometry, attenuation, detector efficiency, coincident summing, and other factors.  
+Sometimes these can be determined experimentally.  
+However, this is not always possible, so having a computational model of the detector can be very beneficial when counting non-standard geometries and sources.
+
+LTC O'Day took a series of measurements using the multi-nuclide source.  
+The associated files are located in the repo in the \href{https://github.com/jamesbevins/NENG685/Projects/Project1_GeDetModel}{Project1\textunderscore GeDetModel} folder. 
+In that folder, we also have the manufacturer specs for the Ge detector.
+Unfortunately, the detector is rarely exactly as described, and model adjustments have to be made by tweaking basic model parameters such as radius, length, and density (see Project \#1 for the goals associated with doing this).
+
+This project's goal is to build a method to automatically sample the possible parameters to optimize the detector model according to some metric (defined by you).  
+There are many ways that this can be done from simply sampling from a n-dimensional array (design of experiment methods) to implementing an optimization routine (I recommend looking at stochastic methods).
+Using brute force is an approach, but it will not result in the maximum possible points (half of method points) and will take a longer time computationally.  
+Each method has its limitations and advantages, and those should be explored before settling on an approach. 
+The output from this project is used in conjunction with Project \#1 to find the optimal model.  
+
+If this is done without a Project \#1, I have a Ge Model for a LBL detector that can be used instead.
+In this case, there will some running of MCNP required, but I can provide a fairly robust set of tools for the running of the MCNP models and analysis of their results.
+
+\textbf{Usefulness:} 
+This project's model could be useful in a broad range of experimental work for many students looking at activation measurement.  
+This tool will be used to improve upon the LBL model which is currently being used to model activation analysis data for the ETA project.
+There is a possibility of a conference paper and/or paper if interested; Dr. Sjoden and LTC O'Day originated the effort to do so.
+
+\textbf{Challenges:}
+This requires a good grasp of many aspects of programming including data I/O, which we didn't cover in detail.
+Other advanced programming concepts may be required as well depending on solution method.
+This choice of solution method will require a bit of thought and background research.
+
+\textbf{Computational requirements:}
+This can be done from a local computer, but the full scale solution might benefit from more processing power.
+
+
+\textbf{NOTE}: If suitable built-in sampling methods are not found, I have stochastic sampling methods that could be altered to fit this project. 
+
+\textbf{POC:} Capt Bevins
+  
+\newpage
+ 
+
+\question \textbf{Neutron RSM:}
+
+We have on-going research into gamma rotating scatter masks (RSMs) that has supported several students both past and present.
+The basic goal of the RSM is to localize the source direction to aid in source search scenarios.
+This is accomplished by rotating a mask of varying thickness.  
+The differing thickness causes the source gammas to be attenuated at different rates, and this attenuation varies as the mask is rotated depending on the source position.
+
+We would like to extend this concept to neutron sources as well.  
+However, neutrons are much more difficult for many reasons.  
+One of the main ones is that we don't get full energy peaks from the deposited neutron.  Instead we get a range of responses, each of which is slightly different.  
+In other words, the problem is no longer a purely attenuation problem.
+
+For this project, we want to model the detector response to 2.45 MeV neutrons using an existing RSM geometry. 
+We will model two RSM material compositions: the current HDPE and a Pb-Bi eutectic.
+The response of the detector will be determined at a minimum of five distinct source locations (locations to be determined by student) for 1", 2", and 3" EJ-309 detectors (models exist for the 2" dectector).
+The goals of the project is to compare the uniqueness of the five response functions for the six different geometries. 
+ 
+\textbf{Usefulness:} 
+This project's model and work could easily lead to a thesis project.  
+The neutron RSM work is likely to get funded for this year, and the goal is to get a master's student this year to help develop the concept for a multi-year research effort.
+
+\textbf{Challenges:}
+How do you mathematically determine the uniqueness of a set of response functions?
+
+\textbf{Computational requirements:}
+This can be done from a local computer, but more processing power may be useful.
+
+\textbf{POC:} Capt Bevins, Lt Olsen
+  
+\newpage
+ 
+
+\question \textbf{88-Inch Source Modeling:}
+
+We have on-going research into targeted modification of neutron energy spectra.  
+One of these efforts was an experiment measuring the performance of an energy tuning assembly at the 88-Inch Cyclotron.  
+To do this, we must know the source spectrum from the 88-Inch, which is non-trivial to determine computationally or analytically.
+So we measured it computationally.
+
+The problem is that we measured it at a point in space, not at the source.
+Additionally, the source's intensity and energy distribution vary as a function of angle, of which we have zero measurements.  
+
+The goal of this project is to determine how to model the source so that we can reproduce our experimental measurements.
+This involves determining the importance of emission angle to the solution, attenuation's contribution to the solution, and the appropriate source distribution and location required to reproduce the experimental results.
+The first two steps can be done with computational experiments, the last step will likely be an iterative process.
+
+I can explain all of these aspects in detail, including the experimental geometry, if this project is chosen.
+Additionally, we have a starting model that is fairly complete minus the source definition.
+Initial models have been run by Capt Stickney, and those results can serve as a starting point.
+
+\textbf{Usefulness:} 
+This project's model and work could lead to a thesis project in a similar area of research.  
+Additionally, it will contribute to another student's current research.
+A detailed, correct solution would lead to co-authorship on at least one paper and conference submission (which you might even be able to present).
+
+\textbf{Challenges:}
+It is not clear that there is an ideal solution, so the project will require some thought as to how to appropriately determine the source.
+
+\textbf{Computational requirements:}
+This needs to run on HPC resources, and MCNP and ADVANTG are required (there may be work arounds for ADVANTG to some extent).  
+It is possible that the Linux cluster would be tractable, but I doubt it.
+If the DSRC resources cannot be made available in time, I can run the generated MCNP decks from my Savio account, but this is less than ideal from a learning standpoint.
+
+\textbf{POC:} Capt Bevins
+
+ 
+\newpage
+
+\question \textbf{Radio-Isotope Production Modeling:}
+
+We have an optimization code that can be used to design radio-isotope targets, which we would like to do for future research.
+However, the first step is building a model of current production processes to use as a comparison basis.
+
+This project would model a radio-isotope production target at MURR using MCNP.
+Weight windows for variance reduction would be generated using ADVANTG.  
+The goal would be to develop the model sufficiently to be able to replicate the experimental production rates at the MURR facility. 
+The student would work with the instructor and MURR staff to define the geometry, production rates, and current target.
+
+\textbf{Usefulness:} 
+This project's model and work could lead to a thesis project in a similar area of research.  
+
+\textbf{Challenges:}
+The project and geometry definitions are not yet fully designed.
+As a risk mitigation, we would select a backup in case the MURR staff do not respond in a timely manner.
+
+\textbf{Computational requirements:}
+It is likely that this could be run on a local machine, but the Linux cluster would be beneficial.
+
+\textbf{POC:} Capt Bevins
+
+\newpage
+
+\question \textbf{Development of Clustering Algorithm for Forensics Data Analysis:}
+
+Environmental samples collected at a nuclear weapons test site have been analyzed for elemental composition (Haws thesis 2017).  The results were subjected to Principle Component Analysis (PCA) to determine if groups of elements could be associated with remnant nuclear fuel.  Plots of the PCA scores show definite clusters in the data.  The objective of this project is to utilize density based spatial clustering techniques (DBScan) to quantitatively identify data clusters and exclude outlying points.  This analytical method is a generically useful data analysis technique that can be applied as a pattern recognition tool instead of identifying clusters by eye.
+
+Ref 1: \href{https://en.wikipedia.org/wiki/DBSCAN}{DBScan}
+
+Ref 2: Haws Thesis (see Fig  25, 26), L:/Research/ENP/GNE Research/McClory/2017/Haws
+
+\textbf{Usefulness:} 
+This project's model and work could lead to a thesis project in a similar area of research.  
+
+\textbf{Challenges:}
+A bit out of scope of the class.
+
+\textbf{Computational requirements:}
+It is likely that this could be run on a local machine, but the Linux cluster could be beneficial.
+
+\textbf{POC:} Dr. Bickley 
+
+\newpage
+
+\question \textbf{Expand Leader Follower Geant4 Simulation:}
+
+In the hypothetical event that more than one nuclear weapon is launched at a target it is useful to know what type of radiation field the following weapon system will be exposed to.  This can be estimated using a Geant4 calculation of a Watts Fission spectrum and recording the energy spectrum of the radiation at various distances from the source.  This project involves modifying existing code (C++, Geant4) to incorporate the appropriate neutron energy spectrum and model the radiation at various altitudes from the simulated detonation.
+
+\textbf{Usefulness:} 
+This project doesn't have a direct thesis tie, but it is a real world type of analysis that is conducted by AFNWC/STRATCOM/DTRA
+
+\textbf{Challenges:}
+GEANT
+
+\textbf{Computational requirements:}
+This would need to be run on the Linux resources.
+
+\textbf{POC:} Dr. Bickley 
+
+\newpage
+
+\question \textbf{2D Diffusion Model:}
+
+Write a 2D Diffusion solver that has vacuum boundaries on the bottom and left faces and reflecting boundaries on the top and right boundaries. 
+
+Components that you'll need to include with the code:
+\begin{itemize}
+\item A README that states
+  \begin{itemize}
+  \item How to compile the code (if applicable)
+  \item How to execute the code
+  \item Status of the code (as applicable): operational/compiles but doesn't run/doesn't compile/known bugs
+  \item Describe the problem solved by your code, expected input, resulting output, and any limitations or restrictions
+  \end{itemize}
+  
+\item A sample input file and corresponding output file produced by your code.
+
+\item Things you'll want to include in the input file:
+  \begin{itemize}
+  \item Number of x and y cells
+  \item Cells size in each dimension (you can choose if you want it to be uniform or non-uniform)
+  \item Number of materials
+  \item A way to assign materials
+  \item Physical constants for each material: $D$, $\Sigma_a$
+  \item Fixed source term. You need to decide things like whether you want a source everywhere or only in some cells, whether it must be constant or can be a function of space, etc. and how to express those choices in the input file.
+  \item If you want to allow for different boundary condition choices, how to specify those.
+  \end{itemize}
+  
+\end{itemize}
+
+The general framework for your code should be:
+\begin{itemize}
+\item \textit{Main Module:} calls subroutines listed in specific sequence, prints execution time, and terminates execution
+
+\item \textit{Version data subroutine:} write code name, version number, author name(s), date and time of execution to an output file (perhaps also print to screen).
+
+\item \textit{Input data subroutine:} read and/or process the input data. Check all input values for correctness/sensibility, e.g., all values are positive, array dimensions are correct, etc. Print an error message and terminate if one or more errors occur, otherwise print notification of successful input checking. 
+
+\item \textit{Input echo subroutine:} print the input data for each cell to the output file (this is good for reproducibility). Please format this in some useful way.
+
+\item \textit{Diffusion solver subroutine:} implement the discretized diffusion solver here. While building the surrounding structure you can just have this print ``will solve DE here". 
+
+\textbf{Computational requirements:}
+This cab be done on a local machine.
+
+\textbf{POC:} Capt Bevins
+
+\end{itemize}
+\end{questions}
+
+
+\end{document}
