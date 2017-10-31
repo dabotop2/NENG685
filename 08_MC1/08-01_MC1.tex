@@ -73,7 +73,7 @@ October 30, 2017}
 
 %-------------------------------------------------------------
 
-\section{Learning Objectives}
+\section*{Learning Objectives}
 
 \begin{enumerate}
   \item Be able to define what a Monte-Carlo (MC) simulation is
@@ -283,7 +283,7 @@ To demonstrate, consider a uniform probability distribution:
 
 Or a discrete probability distribution:
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \begin{center}
 \includegraphics[scale=0.55]{../figs/discretePDF-CDF.png}
 \end{center}
@@ -301,7 +301,7 @@ Some sampling techniques are
   \item \textit{Basic} sampling techniques
   \begin{itemize}
     \item Direct discrete sampling
-    \item Continuous discrete sampling
+    \item Continuous direct sampling
     \item Rejection sampling
   \end{itemize}
   
@@ -314,6 +314,195 @@ Some sampling techniques are
   \end{itemize}
 \end{itemize}
 
-Several of these will be explored in the \href{08-03_Sampling.ipynb}{Sampling iPython notebook}
+The direct continuous sampling and discrete sampling will be explored in the \href{08-03_Sampling.ipynb}{Sampling iPython notebook}.
+
+%--------------------------------------------
+\subsubsection*{Uniformly-Distributed Random Variable}
+
+The standard notation for a uniformly distributed random variable is:
+
+\begin{itemize}
+  \item Single random variable: $\xi$
+  \item Pair of random variables: $(\xi, \eta)$
+\end{itemize}
+      
+When we consider the PDF for random variables, it is given by 
+
+\begin{align*}
+  p(\xi) = \begin{cases} 
+  1 & 0 \leq \xi < 1 \\ 
+  0 & \text{ otherwise} 
+  \end{cases}
+\end{align*}
+  
+\begin{figure}
+  \begin{center}
+  \includegraphics[height=3in,clip]{../figs/unif-dist-var.png}
+  \end{center}
+\end{figure}
+
+%--------------------------------------------
+\subsubsection*{Direct Discrete Sampling}
+
+To sample discrete distributions such as the one shown below, the general pseudocode is given by
+
+\begin{itemize}
+  \item Convert PDF to CDF
+  \item Generate $\xi$
+  \item Determine k such that $P_{k-1} \le \xi \le P_k$
+  \item return $x = x_k$ 
+\end{itemize}
+
+This is shown graphically using the PDF and CDF below.
+
+\begin{figure}
+  \begin{center}
+  \includegraphics[height=4.0in,clip]{../figs/disc-cdf.png}
+  \end{center}
+\end{figure}
+
+This process requires a table search on $P_k$. 
+A linear search requires $\mathcal{O}(N)$, and a binary search requires $\mathcal{O}(log_2N)$ time.
+
+
+%--------------------------------------------
+\subsubsection*{Direct Continuous Sampling}
+
+Direct sampling of a continuous distribution is only possible if the CDF can be inverted.
+If the CDF can be inverted the sampling procedure pseudocode is
+
+\begin{itemize}
+  \item Generate $\xi$
+  \item Determine $x=P^{-1}(\xi)$
+\end{itemize}
+
+This is demonstrated graphically for two sampled values of $\xi$ below where the yellow line is the PDF and the blue is the CDF.
+
+\begin{figure}
+  \begin{center}
+  	\includegraphics[height=3.0in,clip]{../figs/cont-cdf-on-pdf-grey.png}
+  \end{center}
+\end{figure} 
+
+
+%--------------------------------------------
+\subsubsection*{Normalization}
+
+Random sampling depends on shape, so we need to define a method of normalization that can be used to scale the sampled solution.
+First, consider the exponential decay probability given by
+
+\begin{equation*}
+  g(t)dt = e^{-\lambda t}dt, \:\: t>0
+\end{equation*}
+
+The evaluation of the function for a given time, $t$, is given by
+
+\begin{equation*}
+  G(t) = \int_{-\infty}^t g(t')dt' = \int_0^t g(t') dt' = \biggl[- \frac{e^{-\lambda t'}}{\lambda} \biggr]_0^t = \frac{1}{\lambda} \bigl(1 - e^{-\lambda t}\bigr)
+\end{equation*}
+
+Evaluating at $t=\infty$,
+
+\begin{equation*}
+  G(\infty) = \frac{1}{\lambda}
+\end{equation*}
+
+The probability of a decay at time, $t$ is given by
+
+\begin{equation*}
+  p(t) = \frac{g(t)}{G(\infty)}= \lambda g(t) = \lambda e^{-\lambda t} \:, \quad t > 0
+\end{equation*}
+
+The CDF can then be evaluated as
+
+\begin{align*}
+    P(t) &= \int_{-\infty}^t p(t')dt' = \int_0^t \lambda p(t') dt' = \bigl[e^{-\lambda t'} \bigr]_0^t = 1 - e^{-\lambda t}\\
+    %
+    P(\infty) &= 1
+\end{align*}
+
+This procedure can be followed for any PDF governed by a functional form.
+
+%--------------------------------------------
+\subsubsection*{Shifted Uniform Distribution}
+
+A shifted uniform distribution is given as a uniform distribution over some interval other than [0,1).  
+Following the procedure in the normalization section, the sampling can be determined as
+
+\begin{align*}
+  g(x) dx &= Cdx \quad a \leq x < b\\
+  G(x) &= \int_{-\infty}^x g(x')dx' = C \int_a^x dx' = C\bigl[x' \bigr]_a^x = C \bigl(x - a)\\
+  G(\infty) &= G(b) = C(b-a)\\  
+  & \\
+  p(x) &= \frac{g(x)}{G(\infty)} = \frac{C}{C(b-a)} = \frac{1}{b-a} \quad a \leq x < b\\
+  P(x) &= \int_{-\infty}^x p(x')dx' = \frac{1}{b-a}\int_a^x dx' = \frac{x-a}{b-a}\\
+  &\\ 
+  x &= P^{-1}(\xi) = \xi\bigl(b-a\bigr) + a
+\end{align*}
+
+%--------------------------------------------
+\subsubsection*{Simple Line, Slope=$m$}
+
+\begin{align*}
+  g(x) dx &= mx\:dx \qquad 0 \leq x < 1\\
+  G(x) &= \int_{-\infty}^x g(x')dx' = \int_0^x mx' dx' = \frac{m}{2}\bigl[x'^2 \bigr]_0^x = \frac{m}{2} x^2\\
+  G(\infty) &= G(1) = \frac{m}{2}\\
+  & \\
+  p(x) &= \frac{mx}{\frac{m}{2}} = 2x \qquad 0 \leq x < 1\\
+  P(x) &= \int_{-\infty}^x p(x')dx' = \int_0^x 2x' dx' = \bigl[x'^2 \bigr]_0^x = x^2\\
+  &\\
+  x &= P^{-1}(\xi) = \sqrt{\xi} \qquad\text{Independent of }m
+\end{align*}   
+
+%--------------------------------------------
+\subsubsection*{Shifted Line, Slope=$m$}
+
+\begin{align*}
+  g(x) dx &= m(x - a)\:dx \qquad a \leq x < b\\
+  G(x) &= \int_{-\infty}^x g(x')dx' = \int_a^x m(x'-a) dx' = \frac{m}{2}\bigl[(x'-a)^2 \bigr]_0^x = \frac{m}{2} (x-a)^2\\
+  G(\infty) &= G(1) = \frac{m}{2}(b-a)^2\\
+  &\\
+  p(x) &= \frac{m(x-a)}{\frac{m}{2}(b-a)^2} = 2 \frac{x-a}{(b-a)^2}\qquad a \leq x < b\\
+  P(x) &= \int_{-\infty}^x p(x')dx' = \frac{1}{(b-a)^2}\int_a^x 2(x'-a) dx' = \frac{(x-a)^2}{(b-a)^2}\\
+  &\\
+  x &= P^{-1}(\xi) = \sqrt{\xi}(b-a) + a \qquad\text{Independent of }m
+\end{align*}
+
+%--------------------------------------------
+\subsubsection*{Rejection Sampling}
+
+Many CDFs cannot be inverted.  
+For these, we can use a graphical approach similar to the approach used to evaluate $\pi$:
+
+\begin{itemize}
+  \item Select a point in a 2-D domain
+  \item Determine whether that point is above or below the PDF
+  \item Keep those that are below
+  \item Start over if above
+\end{itemize}
+
+To implement this, we must select a bounding function, $g(x)$, such that $g(x) \geq p(x)$ for all $x$ and $g(x)$ is easy to sample. 
+For example, the simplest choice is $g(x)=C$, but this may not always be the best choice.
+We then generate a pair of random variables, $(xi, \eta)$ and
+
+\begin{itemize}
+  \item $x' = G^{-1}(\xi)$
+  \item If $\eta<\frac{p(x')}{g(x')}$, accept $x'$
+  \item Else, reject $x'$
+\end{itemize}
+
+\begin{figure}
+  \begin{center}
+  \includegraphics[height=4.5in,clip]{../figs/rej-samp4.png}
+  \end{center}
+\end{figure}
+
+This method has the advantage that it is computationally simple and always works.
+However, it will be inefficient if the shapes of $g(x)$ and $p(x)$ are dissimilar:
+
+\begin{equation}
+  Efficiency = \frac{\int p(x)dx}{\int g(x)dx}
+\end{equation}
+
 
 \end{document}
