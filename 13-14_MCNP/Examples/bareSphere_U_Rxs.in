@@ -1,0 +1,52 @@
+This models a Godiva reactor sphere with R= 8.7410 and rho=18.7426
+c
+c Ref:"Intercomparison of Calculations for Godiva and Jezebel"
+c
+c This deck calculates the flux and reaction rates for the Godiva reactor. 
+c
+c Modifications to do:
+c 1) Define a fixed volumetric source that has a Watt spectrum. 
+c 2) Add a flux tally.
+c 3) Add a fission reaction rate tally to the fixed source problem.
+c 4) Add 50 logarithmically spaced tally energy bins from 0.01 eV to 20 MeV.
+c 5) Improve the statistics of the low energy bins.
+c 6) How do the results change with the inclusion of the delayed neutrons?
+c
+c *******************************************************************************************
+c  Cell Cards
+c *******************************************************************************************
+c Fissile cylinder
+1  1    -18.743         -1                           imp:n,p=1
+c Problem Boundaries
+2  0                     1                           imp:n,p=0 $ kill zone
+
+c *******************************************************************************************
+c Surfaces
+c *******************************************************************************************
+c Fissile material cylinder
+1 SO 8.741
+
+c *******************************************************************************************
+c Data Cards
+c *******************************************************************************************
+c Material Cards
+c ------------------------
+c U-235 rho=18.743       g/cc
+m1   92234.70c 4.92e+20
+     92235.70c 4.5e+22
+     92238.70c 2.498e+21
+c ------------------------
+c Physics cards
+c ------------------------
+TOTNU NO           $Prompt Component Only
+NONU               $All Fission treated as capture ->no multiplication
+TMP1     2.521e-08    2.521e-08         $Problem Temp
+PRINT
+MODE n               $Neglect photons
+NPS 1E6
+c ------------------------
+c Source
+c ------------------------
+c ------------------------
+c Tallies
+c ------------------------

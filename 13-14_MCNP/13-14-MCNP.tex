@@ -1,0 +1,166 @@
+%--------------------------------------------------------------------
+% NENG 685 (intro to methods for neutral particle transport)
+
+\documentclass[12pt]{article}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+\usepackage{amsthm}
+\usepackage{epsfig}
+\usepackage{times}
+\renewcommand{\ttdefault}{cmtt}
+\usepackage{amsmath}
+\usepackage{graphicx} % for graphics files
+\usepackage{tabu}
+
+% Draw figures yourself
+\usepackage{tikz} 
+
+% The float package HAS to load before hyperref
+\usepackage{float} % for psuedocode formatting
+\usepackage{xspace}
+
+% from Denovo Methods Manual
+\usepackage{mathrsfs}
+\usepackage[mathcal]{euscript}
+\usepackage{color}
+\usepackage{array}
+
+\usepackage[pdftex]{hyperref}
+\usepackage[parfill]{parskip}
+
+% math syntax
+\newcommand{\nth}{n\ensuremath{^{\text{th}}} }
+\newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Macro}{\ensuremath{\Sigma}}
+\newcommand{\rvec}{\ensuremath{\vec{r}}}
+\newcommand{\vecr}{\ensuremath{\vec{r}}}
+\newcommand{\omvec}{\ensuremath{\hat{\Omega}}}
+\newcommand{\vOmega}{\ensuremath{\hat{\Omega}}}
+\newcommand{\sigs}{\ensuremath{\Sigma_s(\rvec,E'\rightarrow E,\omvec'\rightarrow\omvec)}}
+\newcommand{\el}{\ensuremath{\ell}}
+\newcommand{\sigso}{\ensuremath{\Sigma_{s,0}}}
+\newcommand{\sigsi}{\ensuremath{\Sigma_{s,1}}}
+%---------------------------------------------------------------------------
+%---------------------------------------------------------------------------
+\begin{document}
+\begin{center}
+{\bf NENG 685, Fall 17 \\
+Introduction to MCNP\\
+November 17th and 20th, 2017}
+\end{center}
+
+These course notes take a different approach to previous notes.
+Instead of being explicit, key concepts are listed with references back to the MCNP manual.
+This avoids duplication on my part, but more importantly, it gets everyone into the manuals, which is a must for continued use of MCNP.
+All of the page numbers listed are the pdf pg \# from the MCNP6 manual (v1.0 Rev0) for easy browsing unless otherwise noted.
+This manual is included in the directory for these course notes.
+
+\section*{Learning Objectives}
+
+After the class and assignments related to this material, you should be able to 
+\begin{enumerate}
+  \item Develop your own geometry for simple radiation transport problems.
+  \item Create a source that replicates physical sources using built-ins and basic distributions.
+  \item Define tallies for flux and reaction rates.
+  \item Modify the simulation physics
+  \item Run criticality calculations
+  \item Interpret the MCNP output
+\end{enumerate}
+
+\section*{Input Structure}
+
+The basic input deck structure is specified as (pg 22):
+
+One line problem title card \\
+\textit{blank line delimiter} \\
+Cell cards \\
+\textit{blank line delimiter} \\
+Surface cards \\
+\textit{blank line delimiter} \\
+Data Cards \\
+\textit{blank line delimiter (optional)} \\
+
+The complete MCNP input is referred to as a deck.
+Each line in the deck is a card.
+
+The input deck is a bit backwards in terms of how you would actually build a deck from scratch, so I'll meander around the deck in the order I find the most logical.
+
+\section*{Surfaces}
+
+Material definitions are discussed starting on pg. 112.
+Some key concepts:
+
+\begin{itemize}
+  \item Defining surfaces by equations (pg. 65-67)
+  \item Reflective surfaces (pg. 66)
+  \item Macrobodies (pg. 73-79) and facets (pg. 79)
+\end{itemize}
+
+\section*{Materials}
+
+Surface are discussed starting on pg. 64.
+Some key concepts:
+
+\begin{itemize}
+  \item ZAID specifiers (pg. 113; ; la-ur-13-21822 pg. 19)
+  \item Cross-section libraries (pg. 745; la-ur-13-21822)
+  \item Material specification (pg. 113-116)
+\end{itemize}
+
+\section*{Cells}
+
+Cells are discussed starting on pg. 62.
+Some key concepts:
+
+\begin{itemize}
+  \item Cell specification (pg. 62-63)
+  \item Surface ``sense"
+  \item Splitting/Roulette - i.e. importance (pg. 331-332)
+\end{itemize}
+
+\section*{Source Specification}
+
+Sources are discussed starting on pg. 177.
+Some key concepts:
+
+\begin{itemize}
+  \item General SDEF specification (pg. 177-186)
+  \item Information, probability, and bias - SI, SP, SB (pg. 194 - 200)
+  \item Built-in distributions (pg. 197 - 199)
+\end{itemize}
+
+\section*{Tally Specifications}
+
+Tallies are discussed starting on pg. 233.
+Some key concepts:
+
+\begin{itemize}
+  \item Standard tally specification (pg. 235-241)
+  \item Energy modifiers (pg. 257 - 258)
+  \item Angle modifiers (pg. 260 - 21)
+  \item Tally multipliers (pg. 262 - 269)
+\end{itemize}
+
+\section*{Physics Specifications}
+
+Physics are discussed starting on pg. 126.
+Some key concepts:
+
+\begin{itemize}
+  \item Mode (pg. 126 - 127)
+  \item Particle physics (pg. 127 - 139)
+  \item Cut cards (pg. 141 - 144)
+  \item Physics models (pg. 147 - 157)
+\end{itemize}
+
+\section*{Output}
+
+Output is discussed starting on pg. 405.
+
+
+\end{document}

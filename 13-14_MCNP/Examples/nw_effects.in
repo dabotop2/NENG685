@@ -1,0 +1,25 @@
+This models a simple NW neutron burst and models a simple city-scape.
+c
+c Simple NW det scenario.  A NW is set off on the edge of the city.  To start, let's create
+c a scale model.  The key factors for the model: 
+c
+c 1) Model three "city blocks" of long apartment buldings.  The buildings are .3 m high,
+c    .3m wide, and 1.0 m long separated by 0.15 m of air. The walls are .03 m thick concrete.
+c 2) The flux is tallied inside of a car modeled as a 0.1 wide, 0.15 m tall, and 0.25 m long
+     aluminum box with 0.0025 m thick walls. The car is located on the far side of the 3rd
+     block from the source.
+c 3) Add a volume flux tally to the inside of the car.
+c 4) The source is modeled as a point fission source (Watt spectrum) from a HEU bomb.
+c
+c *******************************************************************************************
+c  Cell Cards
+c *******************************************************************************************
+
+c *******************************************************************************************
+c Surfaces
+c *******************************************************************************************
+
+c *******************************************************************************************
+c Data Cards
+c *******************************************************************************************
+

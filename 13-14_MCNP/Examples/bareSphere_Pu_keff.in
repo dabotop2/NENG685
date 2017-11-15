@@ -1,0 +1,49 @@
+This models the Jezebel reactor sphere with R= 6.3850 and rho=15.6116
+c
+c Ref:"Intercomparison of Calculations for Godiva and Jezebel"
+c
+c This deck calculates the keff for the Jezebel reactor. 
+c
+c Modifications to do:
+c
+c 1) What happens if you increase the problem temperature?
+c 2) What happens if you reflect with 1 cm of H20? 1 cm of U238? 1 cm of Be?
+c 3) What happens if you double the density? What happens to the convergence?
+c
+c *******************************************************************************************
+c  Cell Cards
+c *******************************************************************************************
+c Fissile cylinder
+1  1  -15.612   -1            imp:n,p=1
+c Problem Boundaries
+2  0             1            imp:n,p=0 $ kill zone
+
+c *******************************************************************************************
+c Surfaces
+c *******************************************************************************************
+c Fissile material cylinder
+1 SO 6.385
+
+c *******************************************************************************************
+c Data Cards
+c *******************************************************************************************
+c Material Cards
+c ------------------------
+c Pu-239 rho=15.612       g/cc
+M1   94239.70c 3.705e+22
+     94240.70c 1.751e+21
+     94241.70c 1.17e+20
+     31069.70c 8.265e+20
+     31071.70c 8.265e+20
+c ------------------------
+c Physics cards
+c ------------------------
+TOTNU             $Prompt and Delayed Component Captured
+TMP1 2.521e-08    2.521e-08         $Problem Temp
+PRINT
+MODE n            $Neglect photons
+c ------------------------
+c Source
+c ------------------------
+KCODE 1000 1.00 50 250    $  Keff Distributed Src w/1000 histories/gen, init keff=1, skip first 50 cycles, run 250 cylces total
+KSRC  0. 0. 0.            $  Initial fission source location at x=0, y=0, z=0                    
