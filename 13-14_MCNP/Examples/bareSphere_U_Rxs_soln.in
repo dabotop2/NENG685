@@ -47,7 +47,20 @@ NPS 1E6
 c ------------------------
 c Source
 c ------------------------
-SDEF 
+SDEF PAR=n X=d1 Y=d2 Z=d3 CELL=1 ERG=d4
+SI1  -8.741        8.741
+SP1  0  1
+SI2  -8.741        8.741
+SP2  0  1
+SI3  -8.741        8.741
+SP3  0  1
+SP4 -3 0.988        2.249
 c ------------------------
 c Tallies
 c ------------------------
+fc4 Fission Rate, -C  Number of Fissions per cm^3
+f4:n 1
+fm4 -1 1 (-6)     $Flux * atom density of cell 1 * sigma f
+E4 1E-8 50ILog 20
+f14:n 1
+E14 1E-8 50ILog 20
