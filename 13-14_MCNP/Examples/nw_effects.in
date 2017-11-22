@@ -4,12 +4,16 @@ c Simple NW det scenario.  A NW is set off on the edge of the city.  To start, l
 c a scale model.  The key factors for the model: 
 c
 c 1) Model three "city blocks" of long apartment buldings.  The buildings are .3 m high,
-c    .3m wide, and 1.0 m long separated by 0.15 m of air. The walls are .03 m thick concrete.
+c    .3m wide, and 1.0 m long separated by 0.15 m of air. The walls and floor are .03 m thick
+c    concrete.  The building is filled with air
 c 2) The flux is tallied inside of a car modeled as a 0.1 wide, 0.15 m tall, and 0.25 m long
-     aluminum box with 0.0025 m thick walls. The car is located on the far side of the 3rd
-     block from the source.
-c 3) Add a volume flux tally to the inside of the car.
-c 4) The source is modeled as a point fission source (Watt spectrum) from a HEU bomb.
+c    aluminum box with 0.0025 m thick walls, floor, and roof. The car is centered in the 
+c    0.15 m road, which isn't actually defined here, in both width and length. The car is 
+c    filled with air. The car is located on the far side of the 3rd block from the source.
+c 3) Add a volume flux tally to the inside of the car. Tally on 50 log bins from 1 eV to
+c    20 MeV.
+c 4) The source is modeled as a point fission source (Watt spectrum) from a HEU bomb located
+c    1m to the left of the left most building centered on the building.
 c
 c *******************************************************************************************
 c  Cell Cards
