@@ -11,22 +11,20 @@ model                     mcnp
 method                    CADIS
 outputs                   MCNP Silo
 
-mcnp_input                simple_shield_adv.in
-mcnp_input_template       simple_shield_adv.in
+mcnp_input                simple_shield.in
+mcnp_input_template       simple_shield.in
 mcnp_tallies              4
 mcnp_force_point_source   True
 mcnp_mix_tolerance        0.05
 
 anisn_library             dplus
 denovo_pn_order           3
-denovo_x_blocks           2
-denovo_y_blocks           2
 
 mesh_x                    -175   175  
-mesh_x_ints                   100  
+mesh_x_ints                   10  
 
 mesh_y                    -175   175 
-mesh_y_ints                   100  
+mesh_y_ints                   10  
 
 mesh_z                    -175   175
-mesh_z_ints                   100 
+mesh_z_ints                   10 
